@@ -1,0 +1,124 @@
+package com.abc.oqms.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.abc.oqms.entity.Question;
+import com.abc.oqms.entity.Quiz;
+import com.abc.oqms.entity.Round;
+import com.abc.oqms.exception.DuplicateEntryException;
+import com.abc.oqms.exception.QuestionNotFoundException;
+import com.abc.oqms.exception.QuizNotFoundException;
+import com.abc.oqms.exception.RoundNotFoundException;
+import com.abc.oqms.repository.QuizRepository;
+
+@Service
+public class QuizServiceImplementation implements QuizService
+{
+	@Autowired
+	private QuizRepository quizRep;
+	
+		@Override
+		public void addQuiz(Quiz quiz) throws DuplicateEntryException 
+		{
+			Optional<Quiz> opt=quizRep.findById(quiz.getQuizId());
+			if(opt.isPresent()) 
+			{
+				throw new DuplicateEntryException("Quiz already existing with id: "+quiz.getQuizId());
+			}
+			quizRep.save(quiz);	
+		}
+		
+		@Override
+	     public void updateQuiz(Quiz quiz) throws QuizNotFoundException {
+	     Optional<Quiz> opt=quizRep.findById(quiz.getQuizId());
+	     if(opt.isEmpty()) {
+	     throw new QuizNotFoundException("Movie not existing with id: "+quiz.getQuizId());
+	       }
+	       quizRep.save(quiz);
+	        	
+	        }
+	        
+			@Override
+	        public void delete(long quizId) throws QuizNotFoundException 
+	        {
+	        		Optional<Quiz> opt=quizRep.findById(quizId);
+	        		if(opt.isEmpty())
+	        		{
+	        			throw new QuizNotFoundException("Quiz not existing with id: "+quizId);
+	        		}
+	        		quizRep.deleteById((int) quizId);
+	        	}
+			
+			@Override
+			public List<Quiz> searchAll() {
+				List<Quiz> list=quizRep.findAll();		
+				return list;
+			}
+
+			@Override
+			public List<Quiz> searchByQuizId(long quizId) {
+				List<Quiz> list = quizRep.findById(quizId);
+				return list;
+			}
+	        	 
+			@Override
+			public void addRound(Round round) throws DuplicateEntryException 
+			{
+				Optional<Quiz> opt=quizRep.findById(round.getRoundId());
+				if(opt.isPresent()) 
+				{
+					throw new DuplicateEntryException("Round already existing with id: "+round.getRoundId());
+				}
+				quizRep.save(round);	
+			}
+			
+			@Override
+		     public void updateRound(Round round) throws RoundNotFoundException {
+		     Optional<Quiz> opt=quizRep.findById(round.getRoundId());
+		     if(opt.isEmpty()) {
+		     throw new RoundNotFoundException("Movie not existing with id: "+round.getRoundId());
+		       }
+		       quizRep.save(round);
+		        	
+		        }
+		        
+				@Override
+		        public void delete(long quizId) throws QuizNotFoundException 
+		        {
+		        		Optional<Quiz> opt=quizRep.findById(quizId);
+		        		if(opt.isEmpty())
+		        		{
+		        			throw new QuizNotFoundException("Quiz not existing with id: "+quizId);
+		        		}
+		        		quizRep.deleteById((int) quizId);
+		        	}
+				
+				@Override
+				public List<Quiz> searchAll() {
+					List<Quiz> list=quizRep.findAll();		
+					return list;
+				}
+
+				@Override
+				public List<Quiz> searchByQuizId(long quizId) {
+					List<Quiz> list = quizRep.findById(quizId);
+					return list;
+				}
+		        	 
+	     
+
+	        public Round addRound(Round round);   
+        public Round updateRound(Round round) throws RoundNotFoundException; 
+	        public Boolean removeRound(long roundId) throws RoundNotFoundException;  
+       public Round searchRoundById(long roundId) throws RoundNotFoundException;
+
+//	        public Question addQuestion(Question question);
+//	        public Question updateQuestion(Question question) throws QuestionNotFoundException; 
+//	        public Boolean removeQuestion(long questionId) throws QuestionNotFoundException;  
+	           
+
+}

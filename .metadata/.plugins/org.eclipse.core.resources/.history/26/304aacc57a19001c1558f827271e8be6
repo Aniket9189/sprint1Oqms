@@ -1,0 +1,5 @@
+package com.abc.oqms.payload;
+
+public class ErrorResponse {
+
+}

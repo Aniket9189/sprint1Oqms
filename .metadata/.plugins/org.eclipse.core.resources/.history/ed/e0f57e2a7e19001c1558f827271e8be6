@@ -1,0 +1,62 @@
+package com.abc.oqms.controller;
+
+import java.util.List;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.abc.oqms.entity.Quiz;
+import com.abc.oqms.service.QuizService;
+
+@RestController
+@RequestMapping("/quiz")
+public class QuizController 
+{
+		@Autowired
+		private QuizService quizSer;
+		
+		@PostMapping("/add")
+		public ResponseEntity<String> add(@Valid @RequestBody Quiz quiz) {
+			quizSer.addQuiz(quiz);
+			return new ResponseEntity<>("Movie Added with id: "+quiz.getQuizId(),HttpStatus.OK);
+		}
+		
+		@DeleteMapping("/delete/{id}")
+		public ResponseEntity<String> delete(@PathVariable("id") int quizId){
+			quizSer.delete(quizId);
+			return new ResponseEntity<>("Movie Deleted with id: "+quizId,HttpStatus.OK);	
+		}
+		
+		@PutMapping("/update")
+		public ResponseEntity<String> update(@RequestBody Quiz quiz) {
+			quizSer.updateQuiz(quiz);
+			return new ResponseEntity<>("Movie Updated with id: "+quiz.getQuizId(),HttpStatus.OK);
+		}
+		
+		@GetMapping("/getByQuizId/{Quiz}")
+		public List<Quiz> search(@PathVariable("Quiz") long quizId) {
+			List<Quiz> list=quizSer.searchByQuizId(quizId);		
+			return list;
+		}
+		
+		@GetMapping("/get")
+		public List<Quiz> searchMovies() {
+			List<Quiz> list=quizSer.searchAll();		
+			return list;
+		}
+
+	}
+
+
+

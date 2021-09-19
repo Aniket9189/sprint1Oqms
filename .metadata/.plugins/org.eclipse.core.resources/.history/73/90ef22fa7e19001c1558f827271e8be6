@@ -1,0 +1,45 @@
+package com.abc.oqms.controller;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.abc.oqms.entity.Question;
+import com.abc.oqms.service.QuizService;
+
+@RestController
+@RequestMapping("/round")
+public class QuestionController 
+{
+				@Autowired
+				private QuizService quizSer;
+				
+				@PostMapping("/add")
+				public ResponseEntity<String> add(@Valid @RequestBody Question question) {
+					quizSer.addQuestion2(question);
+					return new ResponseEntity<>("Question Added with id: "+question.getQuestionId(),HttpStatus.OK);
+				}
+				
+				@DeleteMapping("/delete/{id}")
+				public ResponseEntity<String> delete(@PathVariable("id") long questionId){
+					quizSer.delete2(questionId);
+					return new ResponseEntity<>("Question Deleted with id: "+questionId,HttpStatus.OK);	
+				}
+				
+				@PutMapping("/update")
+				public ResponseEntity<String> update(@RequestBody Question question) {
+					quizSer.updateQuestion2(question);
+					return new ResponseEntity<>("Question Updated with id: "+question.getQuestionId(),HttpStatus.OK);
+				}
+				
+
+}

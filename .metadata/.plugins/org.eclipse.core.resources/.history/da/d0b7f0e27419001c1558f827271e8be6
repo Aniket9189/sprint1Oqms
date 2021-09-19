@@ -1,0 +1,21 @@
+package com.abc.oqms.service;
+
+import java.util.List;
+
+import com.abc.oqms.entity.Quiz;
+import com.abc.oqms.exception.QuizNotFoundException;
+public interface QuizService 
+{
+	public void addQuiz(Quiz quiz);
+
+	void delete(long quizId) ;
+
+	void updateQuiz(Quiz quiz);
+
+	List<Quiz> searchByQuizId(long quizId);
+
+	List<Quiz> searchAll();
+	List<Quiz> findById( long quizId);
+	
+
+}

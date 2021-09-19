@@ -1,0 +1,5 @@
+package com.abc.oqms.repository;
+
+public class QuizRepository {
+
+}

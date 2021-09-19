@@ -1,0 +1,8 @@
+package com.abc.oqms.exception;
+
+public class RondNotFoundException extends RuntimeException
+{
+	public RondNotFoundException(String message) {
+		super(message);
+	}
+}

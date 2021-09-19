@@ -1,0 +1,9 @@
+package com.abc.oqms.exception;
+
+public class DuplicateEntryException 
+{
+	public  DuplicateEntryException(String message)
+	{
+		super(message);
+}
+}

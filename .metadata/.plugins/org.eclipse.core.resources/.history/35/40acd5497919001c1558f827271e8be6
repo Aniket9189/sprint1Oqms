@@ -1,0 +1,5 @@
+package com.abc.oqms.exception;
+
+public class GlobalException {
+
+}

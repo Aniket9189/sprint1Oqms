@@ -1,0 +1,69 @@
+package com.abc.oqms.controller;
+
+import java.util.List;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.abc.oqms.entity.Round;
+import com.abc.oqms.service.QuizService;
+
+@RestController
+@RequestMapping("/round")
+public class RoundController
+{
+			@Autowired
+			private QuizService quizSer;
+			
+			@PostMapping("/add")
+			public ResponseEntity<String> add(@Valid @RequestBody Round round) {
+				quizSer.addRound1(round);
+				return new ResponseEntity<>("Round Added with id: "+round.getRoundId(),HttpStatus.OK);
+			}
+			
+			@DeleteMapping("/delete/{id}")
+			public ResponseEntity<String> delete(@PathVariable("id") long roundId){
+				quizSer.delete(roundId);
+				return new ResponseEntity<>("Round Deleted with id: "+roundId,HttpStatus.OK);	
+			}
+			
+			@PutMapping("/update")
+			public ResponseEntity<String> update(@RequestBody Round round) {
+				quizSer.updateRound1(round);
+				return new ResponseEntity<>("Round Updated with id: "+round.getRoundId(),HttpStatus.OK);
+			}
+			
+			@GetMapping("/getByRoundId/{Round}")
+			public List<Round> search(@PathVariable("Round") long roundId) {
+				List<Round> list=quizSer.searchByRoundId(roundId);		
+				return list;
+			}
+			
+			@GetMapping("/get")
+			public List<Round> searchRound() {
+				List<Round> list=quizSer.searchAll();		
+				return list;
+				
+				
+				
+				
+				
+				
+				
+			}
+
+		}
+
+
+}

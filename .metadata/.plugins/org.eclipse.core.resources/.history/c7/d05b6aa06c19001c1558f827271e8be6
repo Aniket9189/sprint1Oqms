@@ -1,0 +1,11 @@
+package com.abc.oqms.service;
+
+import com.abc.oqms.entity.Quiz;
+
+public interface QuizService 
+{
+	public Quiz addQuiz(Quiz quiz);
+	
+	  public Boolean removeQuiz(long Id
+
+}

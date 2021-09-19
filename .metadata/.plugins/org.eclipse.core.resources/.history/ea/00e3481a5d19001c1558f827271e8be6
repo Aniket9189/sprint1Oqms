@@ -1,0 +1,32 @@
+package com.abc.oqms.service;
+
+import java.util.List;
+
+import com.abc.oqms.entity.Question;
+import com.abc.oqms.entity.Quiz;
+import com.abc.oqms.entity.Round;
+import com.abc.oqms.exception.QuestionNotFoundException;
+import com.abc.oqms.exception.QuizNotFoundException;
+import com.abc.oqms.exception.RoundNotFoundException;
+
+public interface QuizService
+{
+	 public Quiz addQuiz(Quiz quiz);
+	        public Quiz updateQuiz(Quiz quiz) throws QuizNotFoundException;
+	        public Boolean removeQuiz(long Id) throws QuizNotFoundException;
+	        public Quiz searchQuizById(long quizId) throws QuizNotFoundException;
+	        
+
+	 public Quiz showAllQuiz();
+
+	        public Round addRound(Round round);   
+	        public Round updateRound(Round round) throws RoundNotFoundException; 
+	        public Boolean removeRound(long roundId) throws RoundNotFoundException;  
+	        public Round searchRoundById(long roundId) throws RoundNotFoundException;
+
+	        public Question addQuestion(Question question);
+	        public Question updateQuestion(Question question) throws QuestionNotFoundException; 
+	        public Boolean removeQuestion(long questionId) throws QuestionNotFoundException;  
+	           
+
+}
